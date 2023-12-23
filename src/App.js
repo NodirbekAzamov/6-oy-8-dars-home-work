@@ -51,7 +51,7 @@ export default function App() {
   }
 
   const addUser =()=> {
-    
+    setData2([[]])
   }
 
   const changeInput2 = (event) => {
