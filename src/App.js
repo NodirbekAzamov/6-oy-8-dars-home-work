@@ -20,14 +20,12 @@ export default function App() {
     { id: 5, first_name: "Azizbek", last_name: "Turdiyiv", age: 20, mail: "test@gmail.com" },
     { id: 6, first_name: "Abduazim", last_name: "Yusupov", age: 18, mail: "test@gmail.com" },
   ]
+
   const [user2, setUsers2] = useState(data)
 
   const [data2, setData2] = useState([
     { id: "", first_name: "", last_name: "", age: "", mail: "" },
   ])
-
-
-
 
 
   // task-2
@@ -37,11 +35,11 @@ export default function App() {
   }
 
   // task - 3
-  const changeInput = (event) => {
-    const newData = data.filter(item => {
+  function handleFilter(event) {
+    const newFiltered = data.filter(item => {
       return item.first_name.toLowerCase().includes(event.target.value.toLowerCase());
     })
-    setUsers2(newData)
+    setUsers2(newFiltered)
   }
 
   const remove = (index) => {
@@ -50,19 +48,44 @@ export default function App() {
     setUsers2(newRemove)
   }
 
-  const addUser =()=> {
-    setData2([[]])
+
+  const changeID = (event) => {
+    const result = event.target.value
+    const filtered = data2.filter((item) => item.id = result)
+    setData2(filtered)
   }
 
-  const changeInput2 = (event) => {
-    data2.filter((item) => item = event.target.value)
-    setData2(data2)
+  const changeFirstname = (event) => {
+    const result = event.target.value
+    const filtered = data2.filter((item) => item.first_name = result)
+    setData2(filtered)
   }
 
+  const changeLastname = (event) => {
+    const result = event.target.value
+    const filtered = data2.filter((item) => item.last_name = result);
+    setData2(filtered)
+  }
+
+  const changeAge = (event) => {
+    const result = event.target.value
+    const filtered = data2.filter((item) => item.age = result);
+    setData2(filtered)
+  }
+
+  const changeMail = (event) => {
+    const result = event.target.value
+    const filtered = data2.filter((item) => item.mail = result);
+    setData2(filtered)
+  }
+
+  const addUser = () => {
+    const result = [...user2, ...data2]
+    setUsers2([...result])
+  }
 
   return (
     <div>
-
       {/* task - 1 */}
       <div className='container'>
         <div>
@@ -126,7 +149,7 @@ export default function App() {
         <div className="row">
           <div className="col-8 offset-2">
             <div className='d-flex justify-content-between'>
-              <input type="text" placeholder='Search' onChange={changeInput} className='form-control w-25' />
+              <input type="text" placeholder='Search' onChange={handleFilter} className='form-control w-25' />
               <button className='btn btn-success' onClick={addUser}>Add user</button>
             </div>
 
@@ -155,19 +178,13 @@ export default function App() {
                     )
                   })
                 }
-                {
-                  data2.map((item, index) => {
-                    return (
-                      <tr key={item}>
-                        <td><input onChange={changeInput2} className='form-control w-75' type="number" /></td>
-                        <td><input onChange={changeInput2} className='form-control w-100' type="text" placeholder='firstname' /></td>
-                        <td><input onChange={changeInput2} className='form-control w-100' type="text" placeholder='lastname' /></td>
-                        <td><input onChange={changeInput2} className='form-control w-100' type="number" placeholder='Age' /></td>
-                        <td><input onChange={changeInput2} className='form-control w-100' type="emael" placeholder='Mail' /></td>
-                      </tr>
-                    )
-                  })
-                }
+                <tr>
+                  <td><input onChange={changeID} className='form-control w-75' type="number" /></td>
+                  <td><input onChange={changeFirstname} className='form-control w-100' type="text" placeholder='firstname' /></td>
+                  <td><input onChange={changeLastname} className='form-control w-100' type="text" placeholder='lastname' /></td>
+                  <td><input onChange={changeAge} className='form-control w-100' type="number" placeholder='Age' /></td>
+                  <td><input onChange={changeMail} className='form-control w-100' type="emael" placeholder='Mail' /></td>
+                </tr>
               </tbody>
             </table>
           </div>
